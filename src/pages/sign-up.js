@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { isValid } from 'date-fns';
 import FirebaseContext from '../context/firebase';
 import * as ROUTES from '../constants/routes';
 import { doesUsernameExist } from '../services/firebase';
@@ -22,7 +21,7 @@ export default function Login() {
 
     const usernameExists = await doesUsernameExist(username);
 
-    if (!usernameExists.length) {
+    if (!usernameExists) {
       try {
         const createdUserResult = await firebase
           .auth()
@@ -41,6 +40,7 @@ export default function Login() {
           fullName,
           emailAddress: emailAddress.toLowerCase(),
           following: [],
+          followers: [],
           dateCreated: Date.now()
         });
 
@@ -51,12 +51,9 @@ export default function Login() {
         setPassword('');
         setError(error.message);
       }
+    } else {
+      setError('This Username is already taken, Please try another!');
     }
-
-    // try {
-    // } catch (error) {
-
-    // }
   };
 
   useEffect(() => {
@@ -117,7 +114,7 @@ export default function Login() {
               value={password}
             />
             <button
-              disabled={isValid}
+              disabled={isInvalid}
               type="submit"
               className={`bg-blue-medium text-white w-full rounded h-8 font-bold ${
                 isInvalid && 'opacity-50'

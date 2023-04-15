@@ -504,6 +504,9 @@ video {
 .mt-2 {
   margin-top: 0.5rem;
 }
+.mr-6 {
+  margin-right: 1.5rem;
+}
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -635,6 +638,10 @@ video {
 }
 .font-bold {
   font-weight: 700;
+}
+.text-black-light {
+  --tw-text-opacity: 1;
+  color: rgb(38 38 38 / var(--tw-text-opacity));
 }
 .text-white {
   --tw-text-opacity: 1;
