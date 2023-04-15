@@ -5,7 +5,7 @@ import Sidebar from '../components/sidebar';
 
 export default function Dashboard() {
   useEffect(() => {
-    document.title = 'Instagram - dashboard';
+    document.title = 'Instagram';
   }, []);
 
   return (
